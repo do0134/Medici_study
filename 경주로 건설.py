@@ -42,26 +42,29 @@ from collections import deque
 #     return answer
 
 
+# 76 / 100
 # def solution(board):
 #     length = len(board)
-#     dp = [[[1000] * 4] * length for _ in range(length)]
-#     d = [[0, 1], [1, 0], [0, -1], [-1, 0]]
+#     direction = [[0, 1], [1, 0], [0, -1], [-1, 0]]
+#     dp = [[[10000] * 4 for _ in range(length)] for __ in range(length)]
 #
-#     arr = deque()
-#     arr.append([0, 0, 0, 0])
-#     arr.append([0, 0, 0, 1])
-#     while arr:
-#         ny, nx, nm, look = arr.popleft()
-#         for di in range(4):
-#             my, mx = ny + d[di][0], nx + d[di][1]
-#             if 0 <= my < length and 0 <= mx < length and not board[my][mx]:
-#                 mm = nm + 100
-#                 if di != look:
-#                     mm += 500
-#                 if dp[my][mx][di] > mm:
-#                     dp[my][mx][di] = mm
-#                     if my != length - 1 or mx != length - 1:
-#                         arr.append([my, mx, mm, dp[my][mx][di]])
+#     queue = deque()
+#     queue.append([0, 0, 0, 0])
+#     queue.append([0, 0, 0, 1])
+#     while queue:
+#         x, y, m, d = queue.popleft()
+#         for i2 in range(4):
+#             new_x = x + direction[i2][0]
+#             new_y = y + direction[i2][1]
+#             if 0 <= new_x < length and 0 <= new_y < length and not board[new_x][new_y]:
+#                 new_m = m + 100
+#                 if not d == i2:
+#                     new_m += 500
+#                 if new_m < dp[new_x][new_y][i2]:
+#                     dp[new_x][new_y][i2] = new_m
+#                     if new_x == length - 1 and new_y == length - 1:
+#                         continue
+#                     queue.append([new_x, new_y, new_m, i2])
 #
 #     return min(dp[length - 1][length - 1])
 #     # x, y 순서가 바뀌면 값이 변함. 이유가 뭘까
