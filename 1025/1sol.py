@@ -16,6 +16,10 @@ else:
         cnt += 1
         for i in range(n):
             for j in box:
+                if not box:
+                    break
+                if crane[i] < box[-1]:
+                    break
                 if crane[i] >= j:
                     box.remove(j)
                     break
